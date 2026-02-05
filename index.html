@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Lorena & David</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+/* =================================================
+   1. VARIABLES DE DISEÑO
+================================================= */
+:root{
+  --verde: #6d775f;
+  --verde-oscuro: #4a5241;
+  --rosa: #e8b2b2;
+  --rosa-claro: #f4e8e4;
+  --rosa-fuerte: #d49a9a;
+  --bg-suave: #fcfaf8;
+  --bg-sello: #f9f9f9; 
+  --shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* =================================================
+   2. ESTILOS BASE Y TIPOGRAFÍA
+================================================= */
+*{box-sizing:border-box; margin:0; padding:0;}
+html { scroll-behavior: smooth; }
+body{
+  font-family:'Josefin Sans', sans-serif;
+  background: var(--bg-suave);
+  color:#444;
+  text-align:center;
+  overflow-x: hidden;
+}
+
+h1, h2, .script-font { font-family: 'Pinyon Script', cursive; }
+h1 { font-size: clamp(60px, 10vw, 90px); color: var(--verde); }
+h2 { font-size: clamp(45px, 8vw, 65px); color: var(--rosa-fuerte); margin-bottom: 25px; }
+h3 { font-size: 24px; color: var(--verde); margin: 10px 0 5px; }
+p { font-size: 16px; line-height: 1.7; color: #555; }
+
+.timeline-subtitle { 
+    color: var(--rosa-fuerte); 
+    font-weight: 600; 
+    font-size: 14px; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    margin-bottom: 10px; 
+    display: block; 
+}
+
+/* =================================================
+   3. BOTONES (ESTILO ESTANDARIZADO)
+================================================= */
+.fab { 
+    background: var(--verde); 
+    color: white; 
+    border: none; 
+    padding: 14px 35px; 
+    border-radius: 50px; 
+    font-family: 'Josefin Sans', sans-serif; /* Tipografía idéntica a confirmación */
+    font-size: 15px; 
+    font-weight: 400;
+    cursor: pointer; 
+    text-decoration: none; 
+    display: inline-block; 
+    transition: 0.3s; 
+}
+.fab:hover { background: var(--rosa-fuerte); }
+
+/* =================================================
+   4. ESTRUCTURA GLOBAL Y SECCIONES
+================================================= */
+section {
+  padding: 80px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-bottom: 1px double var(--rosa);
+}
+
+/* =================================================
+   5. SECCIÓN DE APERTURA (INTRO)
+================================================= */
+#intro {
+  position: fixed; inset: 0;
+  background: var(--bg-sello); 
+  display: flex; align-items: center; justify-content: center;
+  z-index: 5000; transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.envelope-main {
+  position: relative;
+  width: 95%; max-width: 650px; height: 500px;
+  background: var(--bg-sello);
+  border-radius: 4px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.05);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; overflow: hidden;
+}
+
+.floral-corner {
+  position: absolute; width: 150px; height: 150px; z-index: 2; opacity: 0.8; pointer-events: none;
+}
+.top-left { 
+  top: -20px; left: -20px; 
+  border-left: 40px solid var(--rosa-claro); border-top: 40px solid var(--rosa-claro);
+  border-radius: 100% 0 0 0;
+}
+.bottom-right { 
+  bottom: -20px; right: -20px; 
+  border-right: 40px solid var(--verde); border-bottom: 40px solid var(--verde);
+  border-radius: 0 0 100% 0; opacity: 0.4;
+}
+
+.intro-header {
+  position: absolute; top: 40px; font-size: 24px; letter-spacing: 10px; font-weight: 400; color: var(--verde-oscuro); z-index: 15;
+}
+
+.wax-seal {
+  position: relative; width: 320px; height: 320px; z-index: 10;
+  display: flex; align-items: center; justify-content: center; transition: transform 0.5s ease;
+}
+.wax-seal img { width: 100%; height: 100%; object-fit: contain; }
+.wax-seal:hover { transform: scale(1.05); }
+
+.intro-text {
+  position: absolute; bottom: 40px; font-size: 12px; letter-spacing: 6px; font-weight: 300; color: var(--verde-oscuro); z-index: 15;
+}
+
+/* =================================================
+   6. HEADER Y NAVEGACIÓN
+================================================= */
+#encabezado-principal {
+  position: sticky; top: 0;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(10px);
+  z-index: 2000; padding: 15px; border-bottom: 1px solid var(--rosa);
+}
+#encabezado-principal h1 { font-size: 45px; margin-bottom: 5px; }
+#menu { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+#menu a { text-decoration: none; color: var(--verde); font-size: 13px; font-weight: 600; text-transform: uppercase; }
+
+/* =================================================
+   7. TARJETAS Y CONTENEDORES
+================================================= */
+.flex-container { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; margin-top: 40px; }
+.card {
+  background: white; padding: 20px; border-radius: 15px;
+  box-shadow: var(--shadow); max-width: 350px; transition: 0.4s;
+}
+.card img { width: 100%; border-radius: 12px; margin-bottom: 15px; cursor: pointer; }
+
+.familia-container .card { max-width: 260px; padding: 15px; }
+.familia-container h3 { font-size: 20px; }
+
+/* =================================================
+   8. HISTORIA (TIMELINE)
+================================================= */
+.timeline { position: relative; max-width: 900px; margin: 60px auto; }
+.timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: var(--rosa); }
+.timeline-item { width: 50%; padding: 25px 40px; position: relative; }
+.timeline-item:nth-child(odd) { left: 0; text-align: right; }
+.timeline-item:nth-child(even) { left: 50%; text-align: left; }
+.timeline-point { position: absolute; top: 35px; width: 16px; height: 16px; background: var(--verde); border-radius: 50%; border: 3px solid white; z-index: 10; }
+.timeline-item:nth-child(odd) .timeline-point { right: -8px; }
+.timeline-item:nth-child(even) .timeline-point { left: -8px; }
+
+/* =================================================
+   9. ITINERARIO
+================================================= */
+.itinerario-v { position: relative; max-width: 500px; margin: 40px auto; padding-left: 50px; text-align: left; }
+.itinerario-v::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; border-left: 2px dashed var(--verde); }
+.iti-event { position: relative; margin-bottom: 35px; background: white; padding: 15px 20px; border-radius: 10px; box-shadow: var(--shadow); }
+.iti-event::after { content: '◈'; position: absolute; left: -43px; top: 15px; background: var(--bg-suave); color: var(--rosa-fuerte); font-size: 20px; }
+.iti-event b { color: var(--verde); font-size: 17px; display: block; }
+
+/* =================================================
+   10. CONTADOR
+================================================= */
+.contador-lujo {
+  background: white; max-width: 700px; margin: 40px auto; padding: 50px;
+  border-radius: 20px; box-shadow: var(--shadow); border: 2px solid var(--rosa);
+}
+#contador { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px; }
+.time-box h3 { font-size: clamp(35px, 5vw, 55px); color: var(--verde); margin: 0; }
+.time-box span { text-transform: uppercase; letter-spacing: 1px; font-size: 12px; color: var(--rosa-fuerte); font-weight: 600; }
+
+/* =================================================
+   11. ELEMENTOS FIJOS Y POPUPS
+================================================= */
+.fab-fixed {
+  position: fixed; right: 20px; width: 45px; height: 45px;
+  border-radius: 50%; background: white; color: var(--verde);
+  z-index: 4000; box-shadow: var(--shadow); border: 1px solid var(--rosa);
+  display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s;
+}
+#btnTop { bottom: 80px; }
+#btnHome { bottom: 20px; }
+
+.popup { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 6000; padding: 20px; }
+.popup-box { background: white; padding: 30px; border-radius: 15px; width: 100%; max-width: 550px; position: relative; }
+
+/* =================================================
+   12. GALERÍA MOMENTOS
+================================================= */
+.moments-wrapper { position: relative; max-width: 100%; margin: 0 auto; overflow: hidden; display: flex; align-items: center; }
+.scroll-galeria { overflow: hidden; padding: 20px 0; width: 100%; }
+.scroll-track { display: flex; gap: 15px; width: max-content; animation: scrollInfinite 40s linear infinite; }
+.scroll-track img { width: 280px; height: 350px; object-fit: cover; border-radius: 15px; box-shadow: var(--shadow); flex-shrink: 0; }
+
+@keyframes scrollInfinite {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.nav-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 45px; height: 45px; background: rgba(255,255,255,0.9);
+  color: var(--verde); border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  font-size: 20px; border: 1px solid var(--rosa); transition: 0.3s;
+}
+.arrow-left { left: 10px; }
+.arrow-right { right: 10px; }
+
+/* =================================================
+   13. RESPONSIVE
+================================================= */
+@media(max-width: 768px){
+  .timeline::before { left: 20px; }
+  .timeline-item { width: 100%; left: 0 !important; text-align: left !important; padding-left: 50px; }
+  .timeline-point { left: 12px !important; }
+  .envelope-main { height: 400px; }
+  .wax-seal { width: 250px; height: 250px; }
+  .intro-header { font-size: 20px; top: 30px; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+  <div class="envelope-main" onclick="abrirInvitacion()">
+    <div class="floral-corner top-left"></div>
+    <div class="floral-corner bottom-right"></div>
+    <div class="intro-header">NOS CASAMOS</div>
+    <div class="wax-seal">
+        <img src="img/sello_ok.jpeg" alt="Sello Personalizado Lorena & David">
+    </div>
+    <div class="intro-text">TOCA PARA ABRIR</div>
+  </div>
+</div>
+
+<div id="contenido" style="display:none;">
+
+  <header id="encabezado-principal">
+    <h1>Lorena & David</h1>
+    <nav id="menu">
+      <a href="#nosotros">Nosotros</a>
+      <a href="#historia">Historia</a>
+      <a href="#familia">Familia</a>
+      <a href="#itinerario">Itinerario</a>
+      <a href="#ceremonia">Ceremonia</a>
+      <a href="#momentos">Momentos</a>
+      <a href="#dress">Dress Code</a>
+      <a href="#confirmacion">Confirmación</a>
+    </nav>
+  </header>
+
+  <section id="nosotros">
+    <h2>Nosotros</h2>
+    <div class="flex-container">
+      <div class="card">
+        <img src="img/lorena.jpeg" onclick="openImg(this.src)">
+        <h3>La Novia</h3>
+      </div>
+      <div class="card">
+        <img src="img/david.jpeg" onclick="openImg(this.src)">
+        <h3>El Novio</h3>
+      </div>
+    </div>
+  </section>
+
+  <section id="historia">
+    <h2>Nuestra Historia</h2>
+    <p>Entendemos que nuestro encuentro no fue casualidad, sino el cumplimiento de un plan perfecto. Dios movió los hilos para que nuestros caminos se cruzaran en el momento exacto</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="timeline-point"></span>
+        <div class="card">
+          <img src="img/Primera llamada.jpeg" onclick="openImg(this.src)">
+          <h3>Un "clic" con propósito</h3>
+          <span class="timeline-subtitle">22 de septiembre de 2020</span>
+          <p>En un momento donde todos estábamos un poco aislados, un mensaje por Messenger cambió nuestro mundo. La conexión fue tan genuina que nuestra primera charla terminó en juegos hasta la madrugada. Hoy vemos hacia atrás y agradecemos a Dios por habernos puesto en el camino del otro de la forma más inesperada.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-point"></span>
+        <div class="card">
+          <img src="img/Primera cita.jpeg" onclick="openImg(this.src)">
+          <h3>El encuentro esperado</h3>
+          <span class="timeline-subtitle">26 de marzo de 2021</span>
+          <p>Después de meses de amistad virtual por la pandemia y retos familiares, finalmente nos vimos en Cota. Ese primer almuerzo fue el recordatorio de que la espera había valido la pena: la química que sentíamos detrás de la pantalla era solo el reflejo de algo mucho más grande y real.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-point"></span>
+        <div class="card">
+          <img src="img/M4.jpeg" onclick="openImg(this.src)">
+          <h3>Nuestra aventura comienza</h3>
+          <span class="timeline-subtitle">3 de julio de 2021</span>
+          <p>David organizó una escapada a un glamping en Silvania. Rodeados de naturaleza, decidimos ser novios, ya no queríamos caminar por separado. Ese día nuestra historia de amor se hizo oficial.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-point"></span>
+        <div class="card">
+          <img src="img/Primer viaje.jpeg" onclick="openImg(this.src)">
+          <h3>Nuestro primer viaje</h3>
+          <span class="timeline-subtitle">21 de julio de 2021</span>
+          <p>Cartagena fue el lugar donde nos descubrimos como compañeros de viaje. Una travesía donde no solo conocimos lugares nuevos, sino que descubrimos que el mundo es mucho más bonito si lo recorremos de la mano. </p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-point"></span>
+        <div class="card">
+          <img src="img/Nuestra familia.jpeg" onclick="openImg(this.src)">
+          <h3>Construyendo nuestro hogar</h3>
+          <span class="timeline-subtitle">16 de junio de 2022 - 27 de octubre de 2024</span>
+          <p>Nuestra vida se llenó de ronroneos y de la cotidianidad más dulce. Decidimos unir nuestros mundos bajo un mismo techo y nuestra familia creció con la llegada de nuestras gatitas, Malina y Thora. Ellas completaron el refugio que hoy llamamos hogar.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-point"></span>
+        <div class="card">
+          <img src="img/Pedida de mano.jpeg" onclick="openImg(this.src)">
+          <h3>El "Sí" definitivo</h3>
+          <span class="timeline-subtitle">2 de marzo de 2025</span>
+          <p>David preparó en Villeta el momento más especial de nuestras vidas. Con la complicidad de un viaje planeado con amor y después de una noche con tormenta eléctrica, llegó la propuesta con la que, entre lágrimas de felicidad y una emoción indescriptible, selló nuestra promesa de caminar juntos hacia el altar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="familia">
+    <h2>Familia</h2>
+    <div class="flex-container familia-container">
+      <div class="card"><img src="img/Claudia.jpeg" onclick="openImg(this.src)"><h3>Claudia Marcela Bustos</h3><p>Madre de la Novia</p></div>
+      <div class="card"><img src="img/Nidya.jpeg" onclick="openImg(this.src)"><h3>Maria Nidya Segura</h3><p>Madre del Novio</p></div>
+      <div class="card"><img src="img/Juan.jpeg" onclick="openImg(this.src)"><h3>Juan Bautista Piñeros</h3><p>Padre de la Novia</p></div>
+      <div class="card"><img src="img/Leo.jpeg" onclick="openImg(this.src)"><h3>Leonardo Ardila</h3><p>Padre del Novio</p></div>
+      <div class="card"><img src="img/Julie.jpeg" onclick="openImg(this.src)"><h3>Juli Johana Navarrete</h3><p>Madrina</p></div>
+      <div class="card"><img src="img/Alejandro.jpeg" onclick="openImg(this.src)"><h3>José Alejandro Bustos</h3><p>Padrino</p></div>
+    </div>
+  </section>
+
+  <section id="itinerario">
+    <h2>Itinerario</h2>
+    <div class="itinerario-v">
+      <div class="iti-event"><b>3:00 PM</b>Llegada de invitados</div>
+      <div class="iti-event"><b>4:00 PM</b>Ceremonia religiosa</div>
+      <div class="iti-event"><b>5:00 PM</b>Snacks y Cóctel de bienvenida</div>
+      <div class="iti-event"><b>6:00 PM</b>Entrada de los Novios</div>
+      <div class="iti-event"><b>7:00 PM</b>Cena de gala</div>
+      <div class="iti-event"><b>8:00 PM</b>Fiesta</div>
+    </div>
+  </section>
+
+  <section id="ceremonia">
+    <h2>Ceremonia</h2>
+    <p>Queremos invitarlos a compartir con nosotros este día tan especial. Será un momento lleno de amor, alegría y memorias inolvidables. Su presencia será el mejor regalo para celebrar el comienzo de esta nueva etapa juntos.</p>
+    <p>Faltan:</p>
+    <div class="contador-lujo">
+      <div id="contador">
+        <div class="time-box"><h3 id="d">0</h3><span>Días</span></div>
+        <div class="time-box"><h3 id="h">0</h3><span>Horas</span></div>
+        <div class="time-box"><h3 id="m">0</h3><span>Minutos</span></div>
+        <div class="time-box"><h3 id="s">0</h3><span>Segundos</span></div>
+      </div>
+    </div>
+    <h3 style="font-size: 32px;">Hacienda Pilares del Rosal</h3>
+    <p>Subachoque-El Rosal #Kilometro 3, El Rosal, Cundinamarca</p>
+    <p>5 de Junio de 2026 • 3:00 PM</p>
+    <p style="margin-bottom: 30px;">Lluvia de sobres</p>
+    <button class="fab" onclick="openPopup('mapaPopup')">Cómo llegar</button>
+  </section>
+
+  <section id="momentos">
+    <h2>Momentos</h2>
+    <div class="moments-wrapper">
+        <div class="nav-arrow arrow-left" onclick="moveTrack('left')">❮</div>
+        <div class="scroll-galeria">
+            <div class="scroll-track" id="track">
+              <img src="img/M1.jpeg" onclick="openImg(this.src)">
+              <img src="img/M2.jpeg" onclick="openImg(this.src)">
+              <img src="img/M3.jpeg" onclick="openImg(this.src)">
+              <img src="img/M5.jpeg" onclick="openImg(this.src)">
+              <img src="img/M6.jpeg" onclick="openImg(this.src)">
+              <img src="img/M7.jpeg" onclick="openImg(this.src)">
+              <img src="img/M8.jpeg" onclick="openImg(this.src)">
+              <img src="img/M9.jpeg" onclick="openImg(this.src)">
+              <img src="img/M10.jpeg" onclick="openImg(this.src)">
+              <img src="img/M1.jpeg" onclick="openImg(this.src)">
+              <img src="img/M2.jpeg" onclick="openImg(this.src)">
+              <img src="img/M3.jpeg" onclick="openImg(this.src)">
+              <img src="img/M5.jpeg" onclick="openImg(this.src)">
+              <img src="img/M6.jpeg" onclick="openImg(this.src)">
+              <img src="img/M7.jpeg" onclick="openImg(this.src)">
+              <img src="img/M8.jpeg" onclick="openImg(this.src)">
+              <img src="img/M9.jpeg" onclick="openImg(this.src)">
+              <img src="img/M10.jpeg" onclick="openImg(this.src)">
+            </div>
+        </div>
+        <div class="nav-arrow arrow-right" onclick="moveTrack('right')">❯</div>
+    </div>
+  </section>
+
+  <section id="dress">
+    <h2>Dress Code</h2>
+    <p>¡Nos vestimos de gala! Esperamos verlos con sus mejores galas para celebrar por todo lo alto. Caballeros: traje y corbata. Damas: vestido largo o de cóctel formal.</p>
+    <div style="margin-top: 30px;">
+        <p style="font-weight: 600; color: var(--verde-oscuro); margin-bottom: 15px;">Se reserva la siguiente paleta de colores</p>
+        <img src="img/paleta.png" alt="Paleta de Colores" style="width: 100%; max-width: 500px; border-radius: 10px; box-shadow: var(--shadow);">
+    </div>
+    <button class="fab" style="margin-top:30px" onclick="openPopup('dressPopup')">Ver referencias</button>
+  </section>
+
+  <section id="confirmacion">
+    <h2>Confirmación</h2>
+    <p>Tu presencia es el mejor regalo. ¡No olvides confirmar! Haznos saber si nos acompañas a vivir este día inolvidable haciendo clic en el siguiente enlace.</p>
+    <a class="fab" style="margin-top:20px" href="https://docs.google.com/forms/d/e/1FAIpQLSdrzhY-hcuY8PnjSRXtzjpXbvSY-8mcX5hisE3ZOXsiFaWlUA/viewform" target="_blank" rel="noopener noreferrer">Confirmar asistencia</a>
+  </section>
+
+  <footer style="padding: 100px 20px;">
+    <h1>Lorena & David</h1>
+    <h2>Gracias por acompañarnos</h2>
+    <p>#LorenayDavid2026</p>
+    <p>© 2026 Lorena & David. Todos los derechos reservados.</p>
+  </footer>
+</div>
+
+<div id="btnTop" class="fab-fixed" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+<div id="btnHome" class="fab-fixed" onclick="location.reload()">✉</div>
+
+<div id="mapaPopup" class="popup">
+  <div class="popup-box">
+    <h3>Ubicación</h3>
+    <div style="width:100%; height:300px; background:#f0f0f0; display:flex; align-items:center; justify-content:center; border-radius:10px; margin-bottom:15px; overflow:hidden;">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.385732156828!2d-74.249257!3d4.875143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwNTInMzAuNSJOIDc0wrAxNCc1Ny4zIlc!5e0!3m2!1ses!2sco!4v1622500000000!5m2!1ses!2sco" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+    <a href="https://maps.app.goo.gl/..." target="_blank" rel="noopener noreferrer" class="fab" style="margin-bottom:10px; width:100%; display:block; text-align: center;">Abrir en Google Maps</a>
+    <button class="fab" style="width: 100%;" onclick="closePopup('mapaPopup')">Cerrar</button>
+  </div>
+</div>
+
+<div id="dressPopup" class="popup">
+  <div class="popup-box">
+    <h3>Referencia Dress Code</h3>
+    <div style="display:flex; gap:10px; margin: 20px 0;">
+      <img src="img/RH.JPG" style="width:48%; border-radius:10px;" onclick="openImg(this.src)">
+      <img src="img/RM.JPG" style="width:48%; border-radius:10px;" onclick="openImg(this.src)">
+    </div>
+    <a href="https://pin.it/YiYryplHY" target="_blank" rel="noopener noreferrer" class="fab" style="background:#bd081c; margin-bottom:10px; width: 100%; text-align: center;">Ver Pinterest</a><br>
+    <button class="fab" style="width: 100%;" onclick="closePopup('dressPopup')">Cerrar</button>
+  </div>
+</div>
+
+<div id="imgPopup" class="popup" onclick="this.style.display='none'"><img id="popupImg" style="max-height: 90vh; max-width: 90%;" alt="Imagen ampliada"></div>
+
+<audio id="musicaBodas" preload="auto">
+  <source src="img/ALLMYLOVE-Coldplay.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* FUNCIONES DE CONTROL */
+function abrirInvitacion(){
+  const musica = document.getElementById('musicaBodas');
+  musica.play().catch(error => console.log("Audio block:", error));
+  
+  document.getElementById('intro').style.transform = 'translateY(-100%)';
+  setTimeout(() => {
+    document.getElementById('intro').style.display = 'none';
+    document.getElementById('contenido').style.display = 'block';
+  }, 900);
+}
+
+function openImg(src){ document.getElementById('popupImg').src = src; document.getElementById('imgPopup').style.display = 'flex'; }
+function openPopup(id){ document.getElementById(id).style.display = 'flex'; }
+function closePopup(id){ document.getElementById(id).style.display = 'none'; }
+
+/* CONTROL DE GALERÍA */
+let offset = 0;
+const track = document.getElementById('track');
+function moveTrack(dir) {
+    track.style.animation = 'none';
+    const slideWidth = 295; 
+    const totalSlides = 9; 
+    dir === 'right' ? offset -= slideWidth : offset += slideWidth;
+    if (Math.abs(offset) >= (slideWidth * totalSlides)) offset = 0;
+    if (offset > 0) offset = -(slideWidth * (totalSlides - 1));
+    track.style.transition = 'transform 0.5s ease-out';
+    track.style.transform = `translateX(${offset}px)`;
+    clearTimeout(window.restartTime);
+    window.restartTime = setTimeout(() => {
+        track.style.transition = 'none';
+        track.style.animation = 'scrollInfinite 40s linear infinite';
+    }, 6000);
+}
+
+/* CONTADOR */
+const target = new Date(2026, 5, 5, 15, 0, 0); 
+setInterval(() => {
+  const now = new Date();
+  let diff = target - now; if(diff < 0) diff = 0;
+  document.getElementById('d').innerHTML = Math.floor(diff / 86400000);
+  document.getElementById('h').innerHTML = Math.floor(diff / 3600000) % 24;
+  document.getElementById('m').innerHTML = Math.floor(diff / 60000) % 60;
+  document.getElementById('s').innerHTML = Math.floor(diff / 1000) % 60;
+}, 1000);
+</script>
+
+</body>
+</html>
